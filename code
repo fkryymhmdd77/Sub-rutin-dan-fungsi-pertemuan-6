@@ -1,0 +1,127 @@
+def tampilkan(nama):  # definisi fungsi
+    """fungsi ini untuk menampilkan nama yang dikirim melalui 
+parameter"""
+print("Hello", "Fikry", "Selamat datang")
+
+tampilkan("Fikry")     # call function with string input 'Fikry'
+nama = "Muhamad Fikry"
+tampilkan(nama)    # call function with variable nama
+
+"""
+Latihan 1: Mengubah Fungsi Biasa menjadi Lambda
+"""
+
+import math
+
+print("="*70)
+print("LATIHAN 1: KONVERSI FUNGSI KE LAMBDA")
+print("="*70)
+
+# ============================================================================
+# FUNGSI ASLI (Menggunakan def)
+# ============================================================================
+print("\n FUNGSI ASLI (menggunakan def):")
+print("-"*70)
+
+def a(x):
+    return x**2
+
+def b(x, y):
+    return math.sqrt(x**2 + y**2)
+
+def c(*args):
+    return sum(args)/len(args)
+
+def d(s):
+    return "".join(set(s))
+
+print("def a(x): return x**2")
+print("def b(x, y): return math.sqrt(x**2 + y**2)")
+print("def c(*args): return sum(args)/len(args)")
+print('def d(s): return "".join(set(s))')
+
+# ============================================================================
+# FUNGSI LAMBDA (Konversi)
+# ============================================================================
+print("\n\n FUNGSI LAMBDA (hasil konversi):")
+print("-"*70)
+
+# Lambda untuk fungsi a(x)
+a_lambda = lambda x: x**2
+print("a_lambda = lambda x: x**2")
+
+# Lambda untuk fungsi b(x, y)
+b_lambda = lambda x, y: math.sqrt(x**2 + y**2)
+print("b_lambda = lambda x, y: math.sqrt(x**2 + y**2)")
+
+# Lambda untuk fungsi c(*args)
+c_lambda = lambda *args: sum(args)/len(args)
+print("c_lambda = lambda *args: sum(args)/len(args)")
+
+# Lambda untuk fungsi d(s)
+d_lambda = lambda s: "".join(set(s))
+print('d_lambda = lambda s: "".join(set(s))')
+
+# ============================================================================
+# TESTING FUNGSI
+# ============================================================================
+print("\n\n TESTING FUNGSI:")
+print("="*70)
+
+# Test fungsi a
+print("\n1. Fungsi a(x) - Menghitung x²")
+print("-"*70)
+test_values_a = [3, 5, -2, 10]
+print(f"{'x':<10} {'def a(x)':<15} {'lambda a(x)':<15} {'Match?':<10}")
+print("-"*70)
+for val in test_values_a:
+    result_def = a(val)
+    result_lambda = a_lambda(val)
+    match = "✓" if result_def == result_lambda else "✗"
+    print(f"{val:<10} {result_def:<15} {result_lambda:<15} {match:<10}")
+
+# Test fungsi b
+print("\n2. Fungsi b(x, y) - Menghitung √(x² + y²)")
+print("-"*70)
+test_values_b = [(3, 4), (5, 12), (1, 1), (6, 8)]
+print(f"{'x, y':<15} {'def b(x,y)':<20} {'lambda b(x,y)':<20} {'Match?':<10}")
+print("-"*70)
+for x, y in test_values_b:
+    result_def = b(x, y)
+    result_lambda = b_lambda(x, y)
+    match = "✓" if abs(result_def - result_lambda) < 0.0001 else "✗"
+    print(f"{f'({x}, {y})':<15} {result_def:<20.4f} {result_lambda:<20.4f} {match:<10}")
+
+# Test fungsi c
+print("\n3. Fungsi c(*args) - Menghitung rata-rata")
+print("-"*70)
+test_values_c = [
+    (1, 2, 3, 4, 5),
+    (10, 20, 30),
+    (5, 5, 5, 5),
+    (100, 200)
+]
+print(f"{'Args':<25} {'def c(*args)':<20} {'lambda c(*args)':<20} {'Match?':<10}")
+print("-"*70)
+for args in test_values_c:
+    result_def = c(*args)
+    result_lambda = c_lambda(*args)
+    match = "✓" if abs(result_def - result_lambda) < 0.0001 else "✗"
+    print(f"{str(args):<25} {result_def:<20.4f} {result_lambda:<20.4f} {match:<10}")
+
+# Test fungsi d
+print("\n4. Fungsi d(s) - Menghapus karakter duplikat")
+print("-"*70)
+test_values_d = ["hello", "programming", "aaabbbccc", "python"]
+print(f"{'String':<20} {'def d(s)':<25} {'lambda d(s)':<25} {'Match?':<10}")
+print("-"*70)
+for string in test_values_d:
+    result_def = d(string)
+    result_lambda = d_lambda(string)
+    # Set tidak menjamin urutan, jadi kita cek apakah set-nya sama
+    match = "✓" if set(result_def) == set(result_lambda) else "✗"
+    print(f"{string:<20} {result_def:<25} {result_lambda:<25} {match:<10}")
+
+print("="*70)
+print("Program selesai!")
+print("="*70)
